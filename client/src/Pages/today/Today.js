@@ -8,13 +8,14 @@ import { breakpoints } from '../../Breakpoints';
 import { ReactContext } from '../../context/context';
 import { Redirect } from 'react-router';
 import LoadingGif from '../../loading.gif';
+require('dotenv').config();
 
 const Today = () => {
   const [today, setToday] = useState('');
   const state = useContext(ReactContext);
 
   useEffect(() => {
-    let localURL = 'http://localhost:5000'
+    let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV;
     // [Can be improved] Coversion to 2021-01-01
     let date = new Date();
     let dateString = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))

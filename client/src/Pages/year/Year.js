@@ -36,7 +36,6 @@ const Yearly = () => {
 
   if (user) {
     created_at = new Date(user.created_at).getFullYear();
-    console.log(created_at);
   }
   if (days && user) {
     curryear_days = get_allDays_inYear(yearno);

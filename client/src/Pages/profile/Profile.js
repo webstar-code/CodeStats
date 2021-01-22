@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ReactContext } from '../../context/context';
-import { Container, Row, Pane, Image, LText, MText, SText, Grid, Loading, Gif } from './ProfileStyles';
+import { Container, Row, Pane, Image, LText, MText, SText, Grid, Loading, Gif, Button } from './ProfileStyles';
 import { format_toReadable_time } from '../../utils/functions';
 import CodeTime from '../../components/CodeTime';
 import { Redirect } from 'react-router';
@@ -12,7 +12,8 @@ const Profile = () => {
   const [all_time, setAll_time] = useState();
   
   useEffect(() => {
-    let localURL = 'http://localhost:5000';
+    let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV ;
+    
     fetch(`${localURL}/api/user/all_time_since_today`, {
       method: 'GET',
       headers: { 'token': state.token }
@@ -54,6 +55,13 @@ const Profile = () => {
           <Grid>
             <CodeTime type="All Time" time={all_time.text} />
             <CodeTime type="Daily Average" time={calculate_alltime_dailyAverage()} />
+            <Pane>
+            <SText>Import data</SText>
+            <Button onClick={() => {
+              localStorage.removeItem('userid');
+              window.location.reload();
+            }}>Import Data</Button>
+            </Pane>
           </Grid>
           </>
         :

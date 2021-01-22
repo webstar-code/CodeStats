@@ -82,3 +82,15 @@ export const Loading = styled.div`
 export const Gif =  styled.img`
   width: 75px;
 `;
+
+export const Button = styled.button`
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+background: #7AD930;
+cursor: pointer;
+border: 1px solid rgba(0,0,0,0.5);
+&:hover {
+  background: #5CA91E;
+}
+`;

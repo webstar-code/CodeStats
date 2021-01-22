@@ -9,7 +9,8 @@ import { seedDatabase } from '../../SeedDatabase';
 const Import = () => {
   const { token } = useContext(ReactContext);
   const [message, setMessage] = useState();
-  let localURL = 'http://localhost:5000';
+  let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV ;
+
 
 
   function get_data_dumps() {

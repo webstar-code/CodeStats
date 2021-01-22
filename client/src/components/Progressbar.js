@@ -11,8 +11,7 @@ const Progressbar = ({ today }) => {
   const state = useContext(ReactContext);
 
   useEffect(() => {
-    let localURL = 'http://localhost:5000';
-
+    let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV ;
     // All time since Today
     fetch(`${localURL}/api/user/all_time_since_today`, {
       method: 'GET',
