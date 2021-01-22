@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { breakpoints } from '../Breakpoints';
 import Graph from './Graph';
-import { format_date_toMonth, format_toReadable_time } from '../utils/functions';
+import { format_toReadable_time } from '../utils/functions';
 
 
 export default function HorizontalBarGraph({ userData }) {

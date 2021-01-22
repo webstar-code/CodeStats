@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Redirect } from 'react-router';
 import styled from 'styled-components'
 import { ReactContext } from '../../context/context';
@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import { seedDatabase } from '../../SeedDatabase';
 
 const Import = () => {
-  const history = useHistory();
   const { token } = useContext(ReactContext);
   const [message, setMessage] = useState();
   let localURL = 'http://localhost:5000';

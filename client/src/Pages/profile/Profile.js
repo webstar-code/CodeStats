@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ReactContext } from '../../context/context';
 import { Container, Row, Pane, Image, LText, MText, SText, Grid, Loading, Gif } from './ProfileStyles';
-import { format_date_toMonth, format_toReadable_time } from '../../utils/functions';
+import { format_toReadable_time } from '../../utils/functions';
 import CodeTime from '../../components/CodeTime';
 import { Redirect } from 'react-router';
 import LoadingGif from '../../loading.gif';
@@ -10,9 +10,9 @@ const Profile = () => {
   const state = useContext(ReactContext);
   const [user, setuser] = useState();
   const [all_time, setAll_time] = useState();
-  let localURL = 'http://localhost:5000';
-
+  
   useEffect(() => {
+    let localURL = 'http://localhost:5000';
     fetch(`${localURL}/api/user/all_time_since_today`, {
       method: 'GET',
       headers: { 'token': state.token }

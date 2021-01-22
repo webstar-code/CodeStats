@@ -21,6 +21,7 @@ export function get_total_time(days) {
     days.map((item) => {
       if(item.grand_total.total_seconds)
         total_seconds +=  item.grand_total.total_seconds
+      return item;
   });
   let hrs;
   let mins;

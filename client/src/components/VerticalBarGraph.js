@@ -49,7 +49,7 @@ export default function VerticalBarGraph({ userData }) {
       titleSpacing: 4,
       bodyFontSize: 12,
       bodySpacing: 4,
-      backgroundColor: '#001A33',
+      // backgroundColor: '#001A33',
       callbacks: {
         label: function (tooltipItem, data) {
           var label = data.datasets[tooltipItem.datasetIndex].label || '';
