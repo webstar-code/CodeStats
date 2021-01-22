@@ -6,6 +6,8 @@ import firebase from '../../lib/firebase.prod';
 const SignIn = () => {
   const history = useHistory();
 
+  let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV;
+
   const params = new URLSearchParams(window.location.search);
   useEffect(() => {
     if (params.has('token')) {
@@ -35,7 +37,7 @@ const SignIn = () => {
       <BoldText>CodeStats</BoldText>
       <Text onClick={() => { params.set('namedas', 1); params.toString(); }}>Signin into your wakatime account</Text>
       <Button>
-        <Link href="http://localhost:5000/auth">Signin with wakatime</Link>
+        <Link href={`${localURL}/auth`}>Signin with wakatime</Link>
       </Button>
       <Text>For testing Purposes</Text>
       <Button onClick={() => BetaSignin()}>
