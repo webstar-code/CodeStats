@@ -11,8 +11,6 @@ const Import = () => {
   const [message, setMessage] = useState();
   let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV ;
 
-
-
   function get_data_dumps() {
     fetch(`${localURL}/api/user/data_dumps`, {
       method: 'GET',
@@ -33,7 +31,7 @@ const Import = () => {
 
   return (
     <Container>
-      {localStorage.getItem('userid') && <Redirect to="/today" />}
+      {localStorage.getItem('userid') && <Redirect to="/" />}
       <BoldText>CodeStats</BoldText>
       <>
         <Text>To view your data you need to import it first.</Text>

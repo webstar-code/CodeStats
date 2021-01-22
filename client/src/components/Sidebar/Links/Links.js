@@ -6,7 +6,7 @@ const Links = ({ToggleSidebar}) => {
   return(
       <Container>
        <Option onClick={() => ToggleSidebar()}>
-         <Link to="/today">Today</Link>
+         <Link to="/">Today</Link>
         </Option>
         <Option onClick={() => ToggleSidebar()}>
           <Link to="/weekly">Weekly</Link>

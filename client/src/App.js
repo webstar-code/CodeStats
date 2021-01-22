@@ -27,11 +27,11 @@ const App = () => {
 
             <ProtectedRoute user={token} path="/import"><Import /></ProtectedRoute>
             <ProtectedRoute user={token} path="/profile" exact><Profile /></ProtectedRoute>
-            <ProtectedRoute user={token} path="/today"><Today /></ProtectedRoute>
+            <ProtectedRoute user={token} path="/" exact><Today /></ProtectedRoute>
             <ProtectedRoute user={token} path="/weekly"><Week /></ProtectedRoute>
             <ProtectedRoute user={token} path="/monthly"><Month /></ProtectedRoute>
             <ProtectedRoute user={token} path="/yearly"><Year /></ProtectedRoute>
-            <Route component={ErrorPage} exact />
+            <Route component={ErrorPage} />
           </Switch>
         </Container>
       </Router>
