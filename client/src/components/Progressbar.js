@@ -11,7 +11,11 @@ const Progressbar = ({ today }) => {
   const state = useContext(ReactContext);
 
   useEffect(() => {
-    let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV ;
+    let localURL = process.env.REACT_APP_SERVER_DEV;
+    if(window.location.hostname != 'localhost') {
+      localURL = process.env.REACT_APP_SERVER_PROD;
+    }
+
     // All time since Today
     fetch(`${localURL}/api/user/all_time_since_today`, {
       method: 'GET',
@@ -41,7 +45,7 @@ const Progressbar = ({ today }) => {
     let today_inHour = today.grand_total.total_seconds / 3600;
     let average_inHour = calculate_alltime_dailyAverage();
     percentage = ((today_inHour / average_inHour).toFixed(2) * 100);
-    if(percentage >= 100) {
+    if (percentage >= 100) {
       percentage = 100;
     }
     // Normalize to 0 - 2 scale
@@ -50,27 +54,28 @@ const Progressbar = ({ today }) => {
     let startScale = 0;
     let endScale = 2;
 
-    let x = startScale + (percentage - 0) * (endScale - startScale) / (max- min); 
+    let x = startScale + (percentage - 0) * (endScale - startScale) / (max - min);
 
-     data = {
-        labels: [''],
-        datasets: [{
-          data: [percentage],
-          backgroundColor: 'green'
-        }],
-      };
-    
-      options = {
-        rotation: 1 * Math.PI,
-        circumference: x * Math.PI,
-        legend: {
-          display: false
-        },
-      }
-  
+    data = {
+      labels: [''],
+      datasets: [{
+        data: [percentage],
+        backgroundColor: 'green',
+      }],
+    };
+
+    options = {
+      cutoutPercentage: 75,
+      rotation: 1 * Math.PI,
+      circumference: x * Math.PI,
+      legend: {
+        display: false
+      },
+    }
+
   }
 
-  
+
 
   return (
     <Container>

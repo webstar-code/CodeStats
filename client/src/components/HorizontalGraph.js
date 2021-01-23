@@ -30,7 +30,7 @@ export default function HorizontalBarGraph({ userData }) {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
         ],
-        maxBarThickness: 24
+        maxBarThickness: 64
       },
     ],
   }
@@ -43,7 +43,8 @@ const options = {
     labels: {
       boxWidth: 0,
       fontSize: 16,
-      fontColor: '#001A33'
+      fontColor: '#001A33',
+      fontWeight: 700
     }
   },
   title: {
@@ -75,6 +76,7 @@ const options = {
         },
         ticks: {
           beginAtZero: true,
+          stepSize: 1
         },
         labelString: 'Hours'
       }

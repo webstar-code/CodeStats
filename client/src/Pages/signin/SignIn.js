@@ -2,11 +2,15 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom';
 import firebase from '../../lib/firebase.prod';
+import { breakpoints } from '../../Breakpoints';
 
 const SignIn = () => {
   const history = useHistory();
-
-  let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV;
+  let localURL = process.env.REACT_APP_SERVER_DEV;
+  if(window.location.hostname != 'localhost') {
+    localURL = process.env.REACT_APP_SERVER_PROD;
+  }
+  console.log(localURL);
 
   const params = new URLSearchParams(window.location.search);
   useEffect(() => {
@@ -26,7 +30,7 @@ const SignIn = () => {
           console.log(doc.data().token);
           let token = doc.data().token;
           localStorage.setItem('token', token);
-          localStorage.setItem('useid', userid);
+          localStorage.setItem('userid', userid);
           window.location.reload();
         }
       })
@@ -63,6 +67,10 @@ export const BoldText = styled.h1`
   color: #001A33;
   margin-bottom: 10px;
   margin-top: -100px;
+  @media only screen and (max-width: ${breakpoints.md}) {
+    font-size: 48px;
+  }
+
   `;
 
 export const Text = styled.h3`

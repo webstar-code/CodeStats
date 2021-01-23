@@ -86,6 +86,8 @@ export const Gif =  styled.img`
 export const Button = styled.button`
 padding: 10px 20px;
 border: none;
+margin: 20px 0px;
+width: 250px;
 border-radius: 5px;
 background: #7AD930;
 cursor: pointer;

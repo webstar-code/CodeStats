@@ -14,8 +14,11 @@ const Today = () => {
   const [today, setToday] = useState('');
   const state = useContext(ReactContext);
 
-  useEffect(() => {
-    let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV;
+  let localURL = process.env.REACT_APP_SERVER_DEV;
+  if(window.location.hostname != 'localhost') {
+    localURL = process.env.REACT_APP_SERVER_PROD;
+  }
+  useEffect(() => {    
     // [Can be improved] Coversion to 2021-01-01
     let date = new Date();
     let dateString = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))

@@ -10,10 +10,13 @@ const Profile = () => {
   const state = useContext(ReactContext);
   const [user, setuser] = useState();
   const [all_time, setAll_time] = useState();
-  
+
   useEffect(() => {
-    let localURL =  process.env.REACT_APP_SERVER_PROD || process.env.REACT_APP_SERVER_DEV ;
-    
+    let localURL = process.env.REACT_APP_SERVER_DEV;
+    if(window.location.hostname != 'localhost') {
+      localURL = process.env.REACT_APP_SERVER_PROD;
+    }
+
     fetch(`${localURL}/api/user/all_time_since_today`, {
       method: 'GET',
       headers: { 'token': state.token }
@@ -27,7 +30,7 @@ const Profile = () => {
 
     if (state)
       setuser(state.user);
-      
+
   }, [state]);
 
   function calculate_alltime_dailyAverage() {
@@ -40,10 +43,10 @@ const Profile = () => {
   }
 
   return (
-      <Container>
-      {!localStorage.getItem('userid') && <Redirect to="/import"/> }
+    <Container>
+      {!localStorage.getItem('userid') && <Redirect to="/import" />}
       {user && all_time ?
-      <>
+        <>
           <Row>
             <Image src={user.photo} />
             <Pane>
@@ -56,21 +59,21 @@ const Profile = () => {
             <CodeTime type="All Time" time={all_time.text} />
             <CodeTime type="Daily Average" time={calculate_alltime_dailyAverage()} />
             <Pane>
-            <SText>Import data</SText>
-            <Button onClick={() => {
-              localStorage.removeItem('userid');
-              window.location.reload();
-            }}>Import Data</Button>
+              <SText>Import data</SText>
+              <Button onClick={() => {
+                localStorage.removeItem('userid');
+                window.location.reload();
+              }}>Import Data</Button>
             </Pane>
           </Grid>
-          </>
+        </>
         :
         <Loading>
           <Gif src={LoadingGif} />
         </Loading>
-        
-        }
-        </Container>
+
+      }
+    </Container>
   )
 }
 
