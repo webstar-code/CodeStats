@@ -13,7 +13,7 @@ router.get('/auth', (req, res) => {
   res.redirect('https://wakatime.com/oauth/authorize?' + (queryparams));
 })
 
-let client_URL = 'http://localhost:3000/signin';
+let client_URL = `${process.env.CLIENT_PROD}/sigin` || `${process.env.CLIENT_DEV}/sigin`;
 
 function toImport(req, res) {
    res.redirect(`${client_URL}?token=${req.body.token}`)

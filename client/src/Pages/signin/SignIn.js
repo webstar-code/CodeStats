@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import {  useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import firebase from '../../lib/firebase.prod';
 
 const SignIn = () => {
@@ -26,6 +26,7 @@ const SignIn = () => {
           console.log(doc.data().token);
           let token = doc.data().token;
           localStorage.setItem('token', token);
+          localStorage.setItem('useid', userid);
           window.location.reload();
         }
       })
