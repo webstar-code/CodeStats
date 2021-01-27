@@ -15,10 +15,10 @@ const Today = () => {
   const state = useContext(ReactContext);
 
   let localURL = process.env.REACT_APP_SERVER_DEV;
-  if(window.location.hostname != 'localhost') {
+  if (window.location.hostname != 'localhost') {
     localURL = process.env.REACT_APP_SERVER_PROD;
   }
-  useEffect(() => {    
+  useEffect(() => {
     // [Can be improved] Coversion to 2021-01-01
     let date = new Date();
     let dateString = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
@@ -36,8 +36,9 @@ const Today = () => {
 
   }, []);
 
-  let time = '';
-  if (today) {
+  let time = '0hrs 0mins';
+  if (today && today.grand_total) {
+    console.log(today);
     let hrs = Math.floor(today.grand_total.total_seconds / 3600);
     let mins = Math.floor((today.grand_total.total_seconds - hrs * 3600) / 60);
     time = `${hrs}hrs ${mins}min`
@@ -51,10 +52,14 @@ const Today = () => {
           <Head>
             <CodeTime type="Today" time={time} />
           </Head>
-          <GraphContainer>
-            <HorizontalBarGraph userData={today} />
-            <Progressbar today={today} />
-          </GraphContainer>
+          {today.message ? 
+          <Text>No Data Available</Text>
+            :
+            <GraphContainer>
+              <HorizontalBarGraph userData={today} />
+              <Progressbar today={today} />
+            </GraphContainer>
+          }
         </Grid>
         :
         <Loading>
@@ -110,6 +115,13 @@ display: flex;
   @media only screen and (max-width:${breakpoints.md}) {
   flex-direction: column;
 }
+`;
+
+export const Text = styled.h1`
+  font-size: 18px;
+  font-weight: 700;
+  color: #001A33;
+  text-align: center;
 `;
 
 export const Loading = styled.div`

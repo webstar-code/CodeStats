@@ -10,7 +10,6 @@ const SignIn = () => {
   if(window.location.hostname != 'localhost') {
     localURL = process.env.REACT_APP_SERVER_PROD;
   }
-  console.log(localURL);
 
   const params = new URLSearchParams(window.location.search);
   useEffect(() => {
@@ -86,8 +85,8 @@ export const Button = styled.button`
   border: none;
   border-radius: 5px;
   background: #7AD930;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   color: #001A33;
   margin-bottom: 50px;
   cursor: pointer;
@@ -98,10 +97,8 @@ export const Button = styled.button`
 `;
 
 export const Link = styled.a`
-  font-size: 18px;
   text-decoration: none;
-  font-weight: 500;
-  color: #001A33;
-
+  color: inherit;
 `;
+
 export default SignIn

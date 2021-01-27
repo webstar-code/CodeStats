@@ -6,7 +6,7 @@ export const Container = styled.div`
   padding: 60px 30px 0px 30px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1;
   gap: 10px 10px;
   grid-template-areas:
     "Head Head Head Head"

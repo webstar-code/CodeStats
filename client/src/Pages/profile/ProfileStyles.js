@@ -14,9 +14,10 @@ export const Row = styled.div`
 `;
 
 export const Image = styled.img`
-display: none;
+  display: none;
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 999px;
   background: green;
   margin-bottom: 20px;
@@ -62,7 +63,8 @@ export const Grid = styled.div`
   width: 75vw;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  grid-gap: 10px;
+  grid-gap: 30px;
+  margin: 30px 0px;
 
   @media only screen and (max-width: ${breakpoints.md}) {
     width: 90vw;
@@ -87,7 +89,7 @@ export const Button = styled.button`
 padding: 10px 20px;
 border: none;
 margin: 20px 0px;
-width: 250px;
+width: 150px;
 border-radius: 5px;
 background: #7AD930;
 cursor: pointer;

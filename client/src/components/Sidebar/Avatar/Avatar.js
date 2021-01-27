@@ -7,7 +7,8 @@ const Avatar = ({user, ToggleSidebar}) => {
 
   return(
     <Container onClick={() => history.push('/profile')}>
-      <Image src={user.photo} />
+      <Image src={user.photo}>
+      </Image>
       <Name>{user.username}</Name>
       <Option onClick={() => ToggleSidebar()}><Link to="/profile">View Profile</Link></Option>
       
@@ -27,6 +28,7 @@ export const Container = styled.div`
 export const Image = styled.img`
   width: 100px;
   height: 100px;
+  object-fit: cover;
   border-radius: 999px;
   background: green;
   margin-bottom: 20px;

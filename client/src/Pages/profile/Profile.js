@@ -58,6 +58,7 @@ const Profile = () => {
           <Grid>
             <CodeTime type="All Time" time={all_time.text} />
             <CodeTime type="Daily Average" time={calculate_alltime_dailyAverage()} />
+          </Grid>
             <Pane>
               <SText>Import data</SText>
               <Button onClick={() => {
@@ -65,7 +66,6 @@ const Profile = () => {
                 window.location.reload();
               }}>Import Data</Button>
             </Pane>
-          </Grid>
         </>
         :
         <Loading>

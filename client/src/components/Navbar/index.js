@@ -13,7 +13,9 @@ const Navbar = () => {
     <>
       <Container >
         <Brand>CodeStats</Brand>
-        <Button onClick={() => LogOut()}>Logout</Button>
+        {localStorage.getItem('token') &&
+          <Button onClick={() => LogOut()}>Logout</Button>
+        }
       </Container>
     </>
   )

@@ -105,7 +105,7 @@ export const Text = styled.h1`
 font-weight: bold;
 font-size: 18px;
 color: #001A33;
-
+margin-bottom: 20px;
 `;
 
 export const ProgressText = styled.h1`
