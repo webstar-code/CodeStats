@@ -39,6 +39,7 @@ const Today = () => {
   let time = '0hrs 0mins';
   if (today && today.grand_total) {
     console.log(today);
+
     let hrs = Math.floor(today.grand_total.total_seconds / 3600);
     let mins = Math.floor((today.grand_total.total_seconds - hrs * 3600) / 60);
     time = `${hrs}hrs ${mins}min`
@@ -48,10 +49,11 @@ const Today = () => {
     <Container>
       {!localStorage.getItem('userid') && <Redirect to="/import" />}
       {today ?
-        <Grid>
+        <Grid> 
           <Head>
             <CodeTime type="Today" time={time} />
           </Head>
+
           {today.message ? 
           <Text>No Data Available</Text>
             :
@@ -60,6 +62,7 @@ const Today = () => {
               <Progressbar today={today} />
             </GraphContainer>
           }
+
         </Grid>
         :
         <Loading>
@@ -121,7 +124,10 @@ export const Text = styled.h1`
   font-size: 18px;
   font-weight: 700;
   color: #001A33;
+<<<<<<< HEAD
   text-align: center;
+=======
+>>>>>>> 362d11413d7cd8de14da213681379d8edbd57ffd
 `;
 
 export const Loading = styled.div`
