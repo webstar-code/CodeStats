@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const axios = require('axios').default;
+const firebase = require('../lib/firebase.prod');
+const Firebase = require('firebase')
 
 router.get('/api/user/today_stats', (req, res) => {
   const date = req.query.date;
@@ -12,11 +14,14 @@ router.get('/api/user/today_stats', (req, res) => {
   };
   axios(config)
     .then(response => {
-      let data = formatData(response.data);
-      res.send(data);
+      if(response.data.data) {
+        let data = formatData(response.data);
+        res.send(data);
+      }else{
+        res.status(200).send({message: 'No data avaliable'})
+      }
     })
     .catch(err => res.status(401).send(err));
-
 })
 
 function formatData(data) {
@@ -47,19 +52,17 @@ function formatData(data) {
   return localdata;
 }
 
-
-// Run  every hour
+// Run every 30 minutes
 setInterval(() => {
-  if (new Date().getUTCMinutes() == 17) {
+  if (new Date().getUTCHours() === 17) {
     let date = new Date();
     date = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
       .toISOString()
       .split("T")[0];
-    console.log(date);
+    // console.log(date);
     PostData(date)
   }
-}, 3600000);
-
+}, 1800000);
 
 function PostData(date) {
 
@@ -80,14 +83,14 @@ function PostData(date) {
           .then(response => {
             let { date, grand_total } = formatData(response.data);
             data = { date, grand_total };
-            console.log(data);
+            // console.log(data);
             firebase.firestore().collection(user.userid).doc('days').update({
-              days: firebase.firestore.FieldValue.arrayUnion(data)
+              days: Firebase.default.firestore.FieldValue.arrayUnion(data),
+              // days: firebase.firestore.FieldValue.arrayUnion(data)
             })
-              .then(() => console.log("Added document"));
+            .then(() => console.log("Added document"));
           })
-          .catch(err => res.status(401).send(err));
-
+          .catch(err => console.log(err));
       }
     })
   })

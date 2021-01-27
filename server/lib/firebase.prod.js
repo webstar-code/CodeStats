@@ -12,5 +12,4 @@ const firebaseConfig = {
   measurementId: "G-Z5WJ6Z2LZ8"
 };
 const firebase = Firebase.initializeApp(firebaseConfig);
-
 module.exports = firebase;
