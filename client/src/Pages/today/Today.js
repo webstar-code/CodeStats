@@ -36,8 +36,8 @@ const Today = () => {
 
   }, []);
 
-  let time = '';
-  if (today) {
+  let time = '0hrs 0mins';
+  if (today && today.data) {
     let hrs = Math.floor(today.grand_total.total_seconds / 3600);
     let mins = Math.floor((today.grand_total.total_seconds - hrs * 3600) / 60);
     time = `${hrs}hrs ${mins}min`
@@ -47,14 +47,16 @@ const Today = () => {
     <Container>
       {!localStorage.getItem('userid') && <Redirect to="/import" />}
       {today ?
-        <Grid>
+        <Grid> 
           <Head>
             <CodeTime type="Today" time={time} />
           </Head>
+          {today.data ?
           <GraphContainer>
             <HorizontalBarGraph userData={today} />
             <Progressbar today={today} />
           </GraphContainer>
+          : <Text> No data available </Text> }
         </Grid>
         :
         <Loading>
@@ -110,6 +112,12 @@ display: flex;
   @media only screen and (max-width:${breakpoints.md}) {
   flex-direction: column;
 }
+`;
+
+export const Text = styled.h1`
+  font-size: 18px;
+  font-weight: 700;
+  color: #001A33;
 `;
 
 export const Loading = styled.div`
