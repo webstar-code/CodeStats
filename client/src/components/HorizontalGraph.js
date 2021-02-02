@@ -6,10 +6,6 @@ import { format_toReadable_time } from '../utils/functions';
 
 
 export default function HorizontalBarGraph({ userData }) {
-  if(!userData) {
-    return null;
-  }
-
 
   const data = {
     labels: userData.projects.map(el => el.project),
@@ -93,12 +89,12 @@ const options = {
 }
 return (
   <Container>
-    {userData ?
+    {userData.projects.length > 0 ?
       <Graph type="horizontalBar" data={data} options={options} />
       :
       <>
-        <h1>No data Available</h1>
-        <p>The data for this period of time may have been not recorded or lost</p>
+        <Text>No data Available</Text>
+        
       </>
     }
   </Container>
@@ -116,3 +112,9 @@ flex-direction: column;
     padding: 10px 0px;
   }
 `;
+
+export const Text = styled.h1`
+    text-align: center;
+`;
+
+

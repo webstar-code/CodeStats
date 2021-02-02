@@ -37,9 +37,8 @@ const Today = () => {
   }, []);
 
   let time = '0hrs 0mins';
-  if (today && today.grand_total) {
-    console.log(today);
 
+  if (today && today.grand_total) {
     let hrs = Math.floor(today.grand_total.total_seconds / 3600);
     let mins = Math.floor((today.grand_total.total_seconds - hrs * 3600) / 60);
     time = `${hrs}hrs ${mins}min`
@@ -53,16 +52,14 @@ const Today = () => {
           <Head>
             <CodeTime type="Today" time={time} />
           </Head>
+     
+          
 
-          {today.message ? 
-          <Text>No Data Available</Text>
-            :
             <GraphContainer>
               <HorizontalBarGraph userData={today} />
               <Progressbar today={today} />
             </GraphContainer>
-          }
-
+          
         </Grid>
         :
         <Loading>
