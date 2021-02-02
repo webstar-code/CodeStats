@@ -14,20 +14,20 @@ router.get('/api/user/today_stats', (req, res) => {
   };
   axios(config)
     .then(response => {
-      if(response.data.data) {
-        let data = formatData(response.data);
-        res.send(data);
-      }else{
-        res.status(200).send({message: 'No data avaliable'})
-      }
+console.log("Y");
+	let data = formatData(response.data);
+	res.status(200).send(data);
     })
     .catch(err => res.status(401).send(err));
 })
 
 function formatData(data) {
-  let grand_total;
+  let grand_total = {
+            total_seconds: 0
+};
   let projects = [];
   let localdata = [];
+if(data.data.length != 0) {
   data.data.forEach((item, index) => {
     if (!projects.includes(item.project)) {
       projects.push(item.project);
@@ -39,6 +39,7 @@ function formatData(data) {
   }
   );
   grand_total = { total_seconds: projects.map(e => e.duration).reduce((t, e) => t + e) }
+}
   let date = new Date(data.end);
   date = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
     .toISOString()
@@ -52,7 +53,7 @@ function formatData(data) {
   return localdata;
 }
 
-// Run every 30 minutes
+// Run every 30 minutes (1800000)
 setInterval(() => {
   if (new Date().getUTCHours() === 17) {
     let date = new Date();
@@ -81,9 +82,9 @@ function PostData(date) {
 
         axios(config)
           .then(response => {
-            let { date, grand_total } = formatData(response.data);
-            data = { date, grand_total };
-            // console.log(data);
+               let { date, grand_total } = formatData(response.data);
+               let data = { date, grand_total };
+             //console.log(data);
             firebase.firestore().collection(user.userid).doc('days').update({
               days: Firebase.default.firestore.FieldValue.arrayUnion(data),
               // days: firebase.firestore.FieldValue.arrayUnion(data)
